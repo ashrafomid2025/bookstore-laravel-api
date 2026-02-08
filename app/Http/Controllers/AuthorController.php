@@ -34,7 +34,7 @@ class AuthorController extends Controller
 
         return response()->json([
             "createdAuthor"=> $author,
-            "error"=> "something went wrong"
+
         ]);
     }
 
