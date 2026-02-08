@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class authorStoreRequest extends FormRequest
+class AuthorInsertRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class authorStoreRequest extends FormRequest
     {
         return [
             //
-            "name"=>"required|string|max:255",
+            "name"=> "required|string|max:120",
             "bio"=> "nullable|string",
             "nationality"=> "nullable|string"
         ];

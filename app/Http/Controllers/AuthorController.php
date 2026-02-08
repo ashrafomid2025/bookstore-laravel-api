@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\authorStoreRequest;
+use App\Http\Requests\AuthorInsertRequest;
+
 use App\Models\Author;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,11 @@ class AuthorController extends Controller
     public function index()
     {
         //
-        $author = Author::all();
+        $author = Author::paginate(8);
+
+        
         return response()->json([
-            "author"=> $author,
+            "data"=> $author,
         ]);
         // json()
     }
@@ -24,15 +27,15 @@ class AuthorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(authorStoreRequest $request)
+    public function store(AuthorInsertRequest $request)
     {
         //
-        $author = Author::create($request->validated(
+       $author =   Author::create($request->validated());
 
-        ));
         return response()->json([
-            "author"=> $author,
-        ],200);
+            "createdAuthor"=> $author,
+            "error"=> "something went wrong"
+        ]);
     }
 
     /**
