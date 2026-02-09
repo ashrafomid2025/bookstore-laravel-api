@@ -42,7 +42,7 @@ class AuthorController extends Controller
         //
        $author =  Author::findOrFail($id);
         return response()->json([
-            "author"=>$author
+            "singleAuthor"=>$author
         ]);
         }
 
