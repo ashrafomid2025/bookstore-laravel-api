@@ -16,11 +16,12 @@ class AuthorController extends Controller
     public function index()
     {
         //
-        $authors = Author::all();
+        $authors = Author::paginate(10);
 
-        
-         return new AuthorResource($authors);
+
+         return  AuthorResource::collection($authors);
         // json()
+        // 
     }
 
     /**
@@ -41,17 +42,20 @@ class AuthorController extends Controller
     {
         //
        $author =  Author::findOrFail($id);
-        return response()->json([
-            "singleAuthor"=>$author
-        ]);
+        return new AuthorResource($author);
         }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AuthorInsertRequest $request, string $id)
     {
         //
+        $author = Author::findOrFail($id);
+        $author->update($request->validated());
+        return response()->json([
+            "author"=> $author,
+        ]);
     }
 
     /**

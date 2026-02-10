@@ -13,7 +13,8 @@ class AuthorResource extends JsonResource
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
-    {
+    {  
+       
         return [
             "name"=> $this->name,
             "bio"=> $this->bio,
