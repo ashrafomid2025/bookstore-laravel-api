@@ -64,5 +64,6 @@ class AuthorController extends Controller
     public function destroy(string $id)
     {
         //
+       $author =  Author::findOrFail($id);
     }
 }
