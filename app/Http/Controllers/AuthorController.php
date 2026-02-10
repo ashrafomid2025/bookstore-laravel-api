@@ -65,5 +65,6 @@ class AuthorController extends Controller
     {
         //
        $author =  Author::findOrFail($id);
+       $author->delete();
     }
 }
