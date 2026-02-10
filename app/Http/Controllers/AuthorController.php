@@ -54,7 +54,7 @@ class AuthorController extends Controller
         $author = Author::findOrFail($id);
         $author->update($request->validated());
         return response()->json([
-            "author"=> $author,
+            "updatedAuthor"=> $author,
         ]);
     }
 
