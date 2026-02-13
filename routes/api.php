@@ -9,4 +9,3 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::apiResource('author', AuthorController::class);
-Route::apiResource('books', AuthorController::class);
