@@ -16,10 +16,10 @@ class AuthorController extends Controller
     public function index()
     {
         //
-        $authors = Author::with('book')->paginate(10);
+        $author = Author::with('book')->paginate(10);
 
 
-         return  AuthorResource::collection($authors);
+         return  AuthorResource::collection($author);
         // json()
         // 
     }
