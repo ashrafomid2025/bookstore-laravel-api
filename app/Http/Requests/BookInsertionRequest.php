@@ -23,7 +23,7 @@ class BookInsertionRequest extends FormRequest
     {
         return [
             "title"=> "required|string|min:7",
-            "isbn"=> "required|string",
+            "isbn"=> "required|string|unique:isbn",
             "description"=> "nullable|string",
             "published_at"=> "required|date",
             "total_copies"=> "nullable|integer|max:200",
