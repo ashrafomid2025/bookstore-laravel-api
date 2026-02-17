@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookInsertionRequest;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use Illuminate\Http\Request;
@@ -21,10 +22,12 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BookInsertionRequest $request)
     {
-        //
-    }
+      $book =   Book::create($request->validated());
+       $book->load("author");
+       return new BookResource($book);
+      }
 
     /**
      * Display the specified resource.

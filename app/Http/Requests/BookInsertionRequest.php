@@ -11,7 +11,7 @@ class BookInsertionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class BookInsertionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "title"=> "required|string|min:7",
+            "isbn"=> "required|string",
+            "description"=> "nullable|string",
+            "published_at"=> "required|date",
+            "total_copies"=> "nullable|integer|max:200",
+            "cover_image"=> "required|string",
+            "price"=> "required|numeric",
+            "author_id"=> "required|integer|exists:authors,id",
+            "genre"=> "required|string"
         ];
     }
 }
