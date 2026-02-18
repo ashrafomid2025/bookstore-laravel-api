@@ -29,7 +29,7 @@ class Book extends Model
         return $this->hasMany(Borrowing::class);
     }
     public function isAvailable(){
-        return $this->available_copies> 0;
+        return $this->available_copies > 0;
     }
     public function borrow(){
         if($this->available_copies> 0){

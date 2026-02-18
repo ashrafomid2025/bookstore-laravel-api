@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookInsertionRequest;
+use App\Http\Requests\BookUpdateRequest;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
+use Exception;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -32,16 +34,22 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Book $book)
     {
         //
+         $book->load("author");
+        return new BookResource($book);
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BookUpdateRequest $request, Book $book)
     {
+       $book->update($request->validated());
+       $book->load('author');
+       return new BookResource($book);
         //
     }
 

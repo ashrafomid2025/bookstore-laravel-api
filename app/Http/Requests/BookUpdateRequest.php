@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BookInsertionRequest extends FormRequest
+class BookUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,16 +21,16 @@ class BookInsertionRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            "title"=> "required|string|min:7",
-            "isbn"=> "required|string",
+           return [
+            "title"=> "nullable|string|min:7",
+            "isbn"=> "nullable|string",
             "description"=> "nullable|string",
-            "published_at"=> "required|date",
+            "published_at"=> "nullable|date",
             "total_copies"=> "nullable|integer|max:200",
-            "cover_image"=> "required|string",
-            "price"=> "required|numeric",
-            "author_id"=> "required|integer|exists:authors,id",
-            "genre"=> "required|string"
+            "cover_image"=> "nullable|string",
+            "price"=> "nullable|numeric",
+            "author_id"=> "nullable|integer|exists:authors,id",
+            "genre"=> "nullable|string"
         ];
     }
 }
