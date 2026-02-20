@@ -33,9 +33,12 @@ class MemberController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Member $member)
     {
         //
+        return response()->json([
+            "member"=> $member,
+        ]);
     }
 
     /**
