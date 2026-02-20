@@ -27,7 +27,7 @@ class MemberController extends Controller
         //
        $member =  Member::create($request->validated());
        return new MemberResource($member); 
-    //    insert some member with this function
+   
     }
 
     /**
