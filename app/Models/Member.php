@@ -16,7 +16,6 @@ class Member extends Model
         "address",
         "membership_date",
         "status",
-
     ];
     protected $casts = [
         "membership_date"=>"date"
