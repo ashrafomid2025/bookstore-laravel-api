@@ -39,7 +39,7 @@ class MemberController extends Controller
         return response()->json([
             "member"=> $member,
         ]);
-        // showing the book
+        
     }
 
     /**
