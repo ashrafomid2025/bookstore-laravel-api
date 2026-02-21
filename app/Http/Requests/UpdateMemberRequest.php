@@ -24,11 +24,11 @@ class UpdateMemberRequest extends FormRequest
     {
         return [
             //
-            "name"=> $this->name,
-            "email"=> $this->email,
-            "whatsApp_number"=> $this->whatsApp_number,
-            "address"=> $this->address,
-            "membership_date"=> $this->membership_date,
+            "name"=> "nullable|string|max:34|min:3",
+            "email"=> "nulllable|string|max:56|min:10",
+            "whatsApp_number"=> "nullable|string",
+            "address"=> "nullable|string",
+            "membership_date"=> "nullable|date",
 
         ];
     }
