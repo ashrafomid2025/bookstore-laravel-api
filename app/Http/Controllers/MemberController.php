@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MemberInsertRequest;
 use App\Http\Resources\MemberResource;
 use App\Models\Member;
+use Exception;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -15,8 +16,15 @@ class MemberController extends Controller
     public function index()
     {
         //
+        try{
        $members =  Member::paginate(10);
        return MemberResource::collection($members);
+        }
+        catch(Exception $eror){
+            return response()->json([
+                "error"=> $eror->getMessage()
+            ]);
+        }
     }
 
     /**
@@ -33,12 +41,20 @@ class MemberController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Member $member)
+    public function show(String $id)
     {
-        //
-        return response()->json([
-            "member"=> $member,
-        ]);
+        try{
+     $member =  Member::findOrFail($id);
+        return new MemberResource($member);
+        }
+        catch(\Exception $error){
+            return response()->json(
+            [
+                "message"=> "Use with the id ". $id . " is not found, please try again"
+            ],
+            405
+            );
+        }
         
     }
 
@@ -47,7 +63,11 @@ class MemberController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+    //     //
+
+       $member =   Member::findOrFail($id);
+       $member->update($request->validated()) ;
+       return new MemberResource($member);  
     }
 
     /**
