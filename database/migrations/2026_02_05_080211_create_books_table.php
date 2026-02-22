@@ -24,6 +24,7 @@ return new class extends Migration
             $table->decimal('price',4,2);
             $table->foreignId('author_id')->constrained('authors')->cascadeOnDelete();
             $table->string('genre');
+            
             $table->timestamps();
 
             $table->index(['title','author_id']);

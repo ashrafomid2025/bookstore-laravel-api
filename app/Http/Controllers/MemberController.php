@@ -76,5 +76,17 @@ class MemberController extends Controller
     public function destroy(string $id)
     {
         //
+        try{
+
+        $member =  Member::findOrFail($id);
+        $member->delete();
+        return response()->json([
+            "message"=> "Member with Id ". $member->id ." has been deleted successfully"
+        ],202);
+        }catch(Exception $error){
+            return response()->json([
+                "error"=> $error->getMessage(),
+            ],404);
+        }
     }
 }
