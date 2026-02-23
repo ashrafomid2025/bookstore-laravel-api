@@ -80,6 +80,7 @@ class MemberController extends Controller
 
         $member =  Member::findOrFail($id);
         $member->delete();
+    
         return response()->json([
             "message"=> "Member with Id ". $member->id ." has been deleted successfully"
         ],202);
