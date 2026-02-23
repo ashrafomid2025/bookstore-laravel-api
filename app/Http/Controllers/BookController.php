@@ -19,17 +19,17 @@ class BookController extends Controller
         //
        $query =  Book::with('author');
     //    seach functionality
-    if($request->has('search')){
+       if($request->has('search')){
         $search = $request->search;
-        $query->where(function($q) use ($search){
-             $q->where('title','like',"%{$search}%" )
-             ->orWhere('isbn','like',"%{$search}%")
-             ->orWhereHas('author', function($authorQuery) use($search){
+        $query->where(function ($q) use($search){
+            $q->where('title','like',"%{$search}%")
+            ->orWhere('isbn','like',"%{$search}%")
+            ->orWhereHas('author', function ($authorQuery) use($search){
                 $authorQuery->where('name','like',"%{$search}%");
-             });
+            });
         });
-    }
-    $books = $query->paginate(10);
+       }
+       $books = $query->paginate(10);
        return BookResource::collection($books);
     }
 
