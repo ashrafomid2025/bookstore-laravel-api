@@ -13,15 +13,26 @@ class AuthorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $r)
     {
         //
-        $author = Author::with('book')->paginate(10);
-
+        $query = Author::with('book');
+        if($r->has('help')){
+            $searchTerm = $r->help;
+            $query->where(function ($q) use($searchTerm) {
+                $q->where('name','like',"%{$searchTerm}%")
+                ->orWhere('nationality','like',"%{$searchTerm}%")
+                ->orWhere('id','=',"{$searchTerm}")
+                ->orWhereHas('book', function($bookQuery) use($searchTerm){
+                    $bookQuery->where('title','like',"%{$searchTerm}%");
+                });
+                
+            });
+        }
+        $author = $query->paginate();
 
          return  AuthorResource::collection($author);
-        // json()
-        // 
+       
     }
 
     /**

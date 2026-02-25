@@ -13,11 +13,25 @@ class MemberController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         try{
-       $members =  Member::paginate(10);
+       $command =  Member::with('activeBorrowing');
+    //    localhost:8000/member?search=b
+    // $con->query("slect")
+       if($request->has('search')){
+        $search =  $request->search;
+       $command->where(function($q) use($search){
+             $q->where('name','like',"%{$search}%")
+            ->orWhere('email','like',"%{$search}%")
+            ->orWhereHas('activeBorrowing',function($bookQuery) use ($search){
+                 $bookQuery->where("title","like","%{$search}%");
+            });
+        
+       });
+       }
+       $members = $command->paginate(10);
        return MemberResource::collection($members);
         }
         catch(Exception $eror){
