@@ -21,7 +21,7 @@ class MemberResource extends JsonResource
             "address"=> $this->address,
             "membership_date"=> $this->membership_date,
             "status"=> $this->status,
-            "active_borrowing_count"=> $this->when(
+            "borrowing_count"=> $this->when(
                 $this->relationLoaded('activeBorrowing'),
                 $this->activeBorrowing()->count()
             ),

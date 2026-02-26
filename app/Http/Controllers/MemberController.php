@@ -58,7 +58,8 @@ class MemberController extends Controller
     public function show(String $id)
     {
         try{
-     $member =  Member::findOrFail($id);
+         $member =  Member::findOrFail($id);
+         $member->with(['borrowing','activeBorrowing']);
         return new MemberResource($member);
         }
         catch(\Exception $error){

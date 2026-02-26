@@ -22,7 +22,7 @@ class AuthorController extends Controller
             $query->where(function ($q) use($searchTerm) {
                 $q->where('name','like',"%{$searchTerm}%")
                 ->orWhere('nationality','like',"%{$searchTerm}%")
-                ->orWhere('id','=',"{$searchTerm}")
+                ->orWhere('id',"{$searchTerm}")
                 ->orWhereHas('book', function($bookQuery) use($searchTerm){
                     $bookQuery->where('title','like',"%{$searchTerm}%");
                 });
