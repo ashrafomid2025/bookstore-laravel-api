@@ -24,13 +24,14 @@ class MemberController extends Controller
         $search =  $request->search;
        $command->where(function($q) use($search){
              $q->where('name','like',"%{$search}%")
-            ->orWhere('email','like',"%{$search}%")
-            ->orWhereHas('activeBorrowing',function($bookQuery) use ($search){
-                 $bookQuery->where("title","like","%{$search}%");
-            });
+            ->orWhere('email','like',"%{$search}%");
         
        });
        }
+       if($request->has('status')){
+        $command->where('status',$request->status);
+       }
+       
        $members = $command->paginate(10);
        return MemberResource::collection($members);
         }
@@ -58,9 +59,8 @@ class MemberController extends Controller
     public function show(String $id)
     {
         try{
-         $member =  Member::findOrFail($id);
-         $member->with(['borrowing','activeBorrowing']);
-        return new MemberResource($member);
+         $member =  Member::with('activeBorrowing')->findOrFail($id);
+         return new MemberResource($member);
         }
         catch(\Exception $error){
             return response()->json(
