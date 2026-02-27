@@ -67,7 +67,7 @@ class MemberController extends Controller
             [
                 "message"=> "Use with the id ". $id . " is not found, please try again"
             ],
-            400
+            406
             );
         }
         
