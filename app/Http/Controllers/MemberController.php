@@ -62,7 +62,7 @@ class MemberController extends Controller
          $member =  Member::with('activeBorrowing')->findOrFail($id);
          return new MemberResource($member);
         }
-        catch(\Exception $error){
+        catch(Exception $error){
             return response()->json(
             [
                 "message"=> "Use with the id ". $id . " is not found, please try again"
