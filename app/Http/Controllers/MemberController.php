@@ -48,9 +48,17 @@ class MemberController extends Controller
     public function store(MemberInsertRequest $request)
     {
         //
+        try{
        $member =  Member::create($request->validated());
        return new MemberResource($member); 
-   
+        }
+        catch(Exception $error){
+            return response()->json(
+                [
+                    "error_message"=> $error->getMessage(),
+                ]
+            );
+        }
     }
 
     /**
@@ -67,7 +75,7 @@ class MemberController extends Controller
             [
                 "message"=> "Use with the id ". $id . " is not found, please try again"
             ],
-            406
+            400
             );
         }
         

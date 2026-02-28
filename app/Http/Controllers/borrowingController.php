@@ -15,8 +15,9 @@ class borrowingController extends Controller
     public function index()
     {
         //
-        $borrowings = Borrowing::with('book','member')->paginate(10);
+        $borrowings = Borrowing::with(['book', 'member'])->paginate(10);
         return BorrowingResource::collection($borrowings);
+    
     }
 
     /**
@@ -25,18 +26,22 @@ class borrowingController extends Controller
     public function store(BorrowingInsertRequest $request)
     {
         //
+        
       $borrow =  Borrowing::create($request->validated());
-      return response()->json([
-        "data"=> $borrow
-      ]);
+      $borrow->load(['book','member']);
+      return new BorrowingResource($borrow);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(String $id)
     {
         //
+        $borrowing = Borrowing::findOrFail($id);
+        $borrowing->load(['book','member']);
+        return new BorrowingResource($borrowing);
+
     }
 
     /**

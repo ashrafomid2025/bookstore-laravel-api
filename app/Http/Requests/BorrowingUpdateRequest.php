@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class MemberInsertRequest extends FormRequest
+class BorrowingUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +22,12 @@ class MemberInsertRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name"=> "required|string|min:3|max:35",
-            "email"=> ["required","string",
-            Rule::unique('members','email')->ignore($this->route('member'),'id'),
-            ],
-            "whatsApp_number"=> "nullable|min:3|max:35",
-            "address"=> "required|min:5|max:128",
+            //
+            "member_id"=> "nullable|integer",
+            "book_id"=> "nullable|integer",
+            "borrowed_date"=>"nullable|date",
+            "returned_date"=>"required|date",
+            "status"=>"required|string"
         ];
     }
 }
