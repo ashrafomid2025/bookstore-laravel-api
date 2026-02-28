@@ -29,7 +29,7 @@ class BookUpdateRequest extends FormRequest
             ],
             "description"=> "nullable|string",
             "published_at"=> "nullable|date",
-            "total_copies"=> "nullable|integer|max:200",
+            "total_copies"=> "nullable|integer|max:80",
             "cover_image"=> "nullable|string",
             "price"=> "nullable|numeric",
             "author_id"=> "nullable|integer|exists:authors,id",
