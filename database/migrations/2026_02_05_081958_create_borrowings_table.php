@@ -20,7 +20,6 @@ return new class extends Migration
             $table->date('returned_date')->nullable();
             $table->enum('status',['borrowed','returned','overdue'])->default('borrowed');
             $table->timestamps();
-
             $table->index(['member_id','status']);
             $table->index(['due_date']);
         });
