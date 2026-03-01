@@ -35,6 +35,7 @@ class borrowingController extends Controller
       $borrow->load(['book','member']);
       $bookid = $borrow->book->id;
       $book =  Book::findOrFail($bookid);
+    //   update the validated num of copies to decrease
       $book->update([
         "avaiable_copies"=> $book->avaiable_copies--
       ]);
