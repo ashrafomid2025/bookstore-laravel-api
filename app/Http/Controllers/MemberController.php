@@ -49,6 +49,7 @@ class MemberController extends Controller
     {
         //
         try{
+
        $member =  Member::create($request->validated());
        return new MemberResource($member); 
         }
@@ -99,18 +100,28 @@ class MemberController extends Controller
     public function destroy(string $id)
     {
         //
-        try{
-
-        $member =  Member::findOrFail($id);
-        $member->delete();
     
-        return response()->json([
-            "message"=> "Member with Id ". $member->id ." has been deleted successfully"
-        ],202);
-        }catch(Exception $error){
-            return response()->json([
-                "error"=> $error->getMessage(),
-            ],404);
+       try{
+        $member =  Member::findOrFail($id);
+        $member->load(['borrowing','activeBorrowing']);
+        if($member->activeBorrowing()->count()>0){
+            return response()->json(
+                ["message"=>"You cannot delete ".$member->name ." bacause he/she borrowed ". $member->activeBorrowing()->count() . " books" ]
+            );
         }
+        else{
+            $member->delete();
+            return response()->json(
+                ["message"=> $member->name ." has been deleted successfully he can no longer use our facilities"]
+            );
+        }
+       }
+       catch(Exception $err){
+        return response()->json(
+            [
+                "error_message"=> $err->getMessage(),
+            ]
+        );
+       }
     }
 }

@@ -23,8 +23,8 @@ class BorrowingUpdateRequest extends FormRequest
     {
         return [
             //
-            "member_id"=> "nullable|integer",
-            "book_id"=> "nullable|integer",
+            "member_id"=> "nullable|integer|exists:members,id",
+            "book_id"=> "nullable|integer|exists:books,id",
             "borrowed_date"=>"nullable|date",
             "returned_date"=>"required|date",
             "status"=>"required|string"
