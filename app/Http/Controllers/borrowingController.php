@@ -71,4 +71,17 @@ class borrowingController extends Controller
         $borrowing->load(['book','member']);
         return new BorrowingResource($borrowing);
     }
+    public function overdue(){
+        $overdueBorrowings = Borrowing::with(['book','member'])
+        ->where('status','borrowed')
+        ->where('due_date','<',now())
+        ->get();
+
+        // update overdues
+        Borrowing::where('status','borrowed')
+        ->where('due_date','<',now())
+        ->update(['status'=> 'overdue']);
+
+        return BorrowingResource::collection($overdueBorrowings);
+    }
 }
