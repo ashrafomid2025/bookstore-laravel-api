@@ -22,3 +22,4 @@ Route::apiResource('borrow', borrowingController::class)->only('index','store','
 
 //return book & overdue
 Route::post('borrowings/{borrowing}/return',[borrowingController::class,'returnBook']); 
+Route::get('borrowings/overdue/list',[borrowingController::class,'overdue']);
