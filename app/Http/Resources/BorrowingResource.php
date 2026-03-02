@@ -18,7 +18,10 @@ class BorrowingResource extends JsonResource
             "book"=> new BookResource($this->whenLoaded('book')),
             "member"=> new MemberResource($this->whenLoaded('member')),
             "borrowed_date"=> $this->borrowed_date,
+            
             "due_date"=>$this->due_date,
+            "returned_date"=>$this->returned_date,
+            "isOverdue"=> $this->isOverdue(),
             "status"=>$this->status
         ];
     }
