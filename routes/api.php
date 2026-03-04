@@ -18,8 +18,8 @@ Route::apiResource('book', BookController::class);
 // Memeber
 Route::apiResource('member', MemberController::class);
 
-Route::apiResource('borrow', borrowingController::class)->only('index','store','show');
 
-//return book & overdue
+Route::apiResource('borrow',borrowingController::class)->only('index','store','show');
+
 Route::post('borrowings/{borrowing}/return',[borrowingController::class,'returnBook']); 
 Route::get('borrowings/overdue/list',[borrowingController::class,'overdue']);
