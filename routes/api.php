@@ -21,7 +21,7 @@ Route::apiResource('member', MemberController::class);
 
 // authetication, 
 Route::post("register",[AuthController::class,'register']);
-Route::post("login",[AuthController::class,'login']);
+Route::post("login",[AuthController::class,'signIn']);
 Route::apiResource('borrow',borrowingController::class)->only('index','store','show');
 
 Route::post('borrowings/{borrowing}/return',[borrowingController::class,'returnBook']); 
