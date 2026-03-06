@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\borrowingController;
@@ -19,7 +20,7 @@ Route::apiResource('book', BookController::class);
 Route::apiResource('member', MemberController::class);
 
 // authetication, 
-
+Route::post("register",[AuthController::class,'register']);
 Route::apiResource('borrow',borrowingController::class)->only('index','store','show');
 
 Route::post('borrowings/{borrowing}/return',[borrowingController::class,'returnBook']); 
