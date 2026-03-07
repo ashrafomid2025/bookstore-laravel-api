@@ -42,5 +42,6 @@ class AuthController extends Controller
          "email"=> "required|string",
          "password"=> "required"
       ]);
+     $user =  User::where("email",$validated["email"])->first();
     }
 }
