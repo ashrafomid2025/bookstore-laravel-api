@@ -19,10 +19,12 @@ Route::apiResource('book', BookController::class);
 // Memeber
 Route::apiResource('member', MemberController::class);
 
-// authetication, 
-Route::post("register",[AuthController::class,'register']);
-Route::post("login",[AuthController::class,'signIn']);
+
 Route::apiResource('borrow',borrowingController::class)->only('index','store','show');
 
 Route::post('borrowings/{borrowing}/return',[borrowingController::class,'returnBook']); 
 Route::get('borrowings/overdue/list',[borrowingController::class,'overdue']);
+
+// authentication routes
+Route::post('register', [AuthController::class, 'signup']);
+Route::post('login', [AuthController::class, 'login']);
