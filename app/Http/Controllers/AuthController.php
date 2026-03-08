@@ -39,7 +39,7 @@ class AuthController extends Controller
         $validated =  $request->validate([
             "email"=> "required|string",
             "password"=> "required|string|min:6",
-         ]);
+      ]);
          
 
        $user =   User::where('email', $validated["email"])->first();
@@ -47,6 +47,7 @@ class AuthController extends Controller
              return response()->json(
                 [
                   "success"=> false,
+                  "user"=>new UserResource($user),
                   "message"=> "email or password is incorrect"]
              );
        }
