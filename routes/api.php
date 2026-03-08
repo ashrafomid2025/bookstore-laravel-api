@@ -12,7 +12,11 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::apiResource('author', AuthorController::class);
+
+Route::middleware('auth:sanctum')->group(function(){
+    
+    Route::apiResource('author', AuthorController::class);
+});
 
 // Books
 Route::apiResource('book', BookController::class);
