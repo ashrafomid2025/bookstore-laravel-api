@@ -14,10 +14,10 @@ Route::get('/user', function (Request $request) {
 
 
 Route::middleware('auth:sanctum')->group(function(){
-    
     Route::apiResource('author', AuthorController::class);
 });
 
+// author route is now protected
 // Books
 Route::apiResource('book', BookController::class);
 // Memeber
