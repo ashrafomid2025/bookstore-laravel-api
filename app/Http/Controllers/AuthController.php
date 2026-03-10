@@ -51,12 +51,22 @@ class AuthController extends Controller
                   "message"=> "email or password is incorrect"]
              );
        }
-      $token =  $user->createToken("auth_token")->plainTextToken;
+      $token =  $user->createToken("auth_token",["read"])->plainTextToken;
       return response()->json([
          "success"=> true,
+         "user"=> new UserResource($user),
          "token"=> $token,
       ]);
 
+     }
+
+     public function logout(Request $request){
+       $request->user()->tokens()->delete();
+       return response()->json(
+         [
+            "data"=> "you are logged out"
+         ]
+       );
      }
 
     

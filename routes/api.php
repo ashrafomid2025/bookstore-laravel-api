@@ -15,13 +15,14 @@ Route::get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('author', AuthorController::class);
-});
-
-// author route is now protected
-// Books
-Route::apiResource('book', BookController::class);
-// Memeber
-Route::apiResource('member', MemberController::class);
+    Route::apiResource('book', BookController::class);
+    Route::post("logout",[AuthController::class, 'logout']);
+    });
+    
+    // author route is now protected
+    // Books
+    // Memeber
+    Route::apiResource('member', MemberController::class);
 
 
 Route::apiResource('borrow',borrowingController::class)->only('index','store','show');
