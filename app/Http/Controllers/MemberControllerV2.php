@@ -8,24 +8,22 @@ use App\Models\Member;
 use Exception;
 use Illuminate\Http\Request;
 
-class MemberController extends Controller
+class MemberControllerV2 extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+   public function index(Request $request)
     {
         //
-        try{
+    try{
        $command =  Member::with('activeBorrowing');
-    //    localhost:8000/member?search=b
-    // $con->query("slect")
+    
        if($request->has('search')){
         $search =  $request->search;
        $command->where(function($q) use($search){
              $q->where('name','like',"%{$search}%")
-            ->orWhere('email','like',"%{$search}%");
-        
+            ->orWhere('whatsApp_number','like',"%{$search}%");
        });
        }
        if($request->has('status')){
@@ -47,7 +45,7 @@ class MemberController extends Controller
      */
     public function store(MemberInsertRequest $request)
     {
-        // laravel , api =>
+        //
         try{
 
        $member =  Member::create($request->validated());
