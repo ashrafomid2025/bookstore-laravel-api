@@ -14,6 +14,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // laravel=> python
+// 
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('author', AuthorController::class);
